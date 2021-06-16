@@ -25,11 +25,14 @@
 //! provides a convenient way to iterate over subsets of a slice. The
 //! `InclusionExclusion` struct provides a building block for visiting
 //! all subsets more efficiently.
-use std::iter::{self, FromIterator};
-use std::option;
-use std::ops::Range;
+#[no_std]
 
-
+extern crate hashbrown;
+use hashbrown::HashSet;
+extern crate core;
+use core::iter::{self, FromIterator};
+use core::option;
+use core::ops::Range;
 // FIXME: write tests that cover all the "Panics" sections
 
 
@@ -42,7 +45,7 @@ macro_rules! gray_code_impl {
         /// Generate all four-bit Gray codes.
         ///
         /// ```
-        /// use gray_codes::GrayCode32;
+        /// use no_gray::GrayCode32;
         ///
         /// assert_eq!(GrayCode32::with_bits(4).collect::<Vec<u32>>(),
         ///            vec![0b0000,
@@ -66,7 +69,7 @@ macro_rules! gray_code_impl {
         /// This could also be done with either of the other two constructors.
         ///
         /// ```
-        /// # use gray_codes::GrayCode32;
+        /// # use no_gray::GrayCode32;
         /// #
         /// for (x,y) in Iterator::zip(GrayCode32::with_bits(4),
         ///                            GrayCode32::over_range(0..(1<<4))) {
@@ -248,8 +251,9 @@ pub enum SetMutation {
 /// Visit every subset of a set of strings by mutating a `HashSet`.
 ///
 /// ```
-/// use std::collections::HashSet;
-/// use gray_codes::{InclusionExclusion, SetMutation};
+/// extern crate hashbrown;
+/// use hashbrown::HashSet;
+/// use no_gray::{InclusionExclusion, SetMutation};
 ///
 /// static STRINGS: &[&str] = &["apple", "moon", "pie"];
 ///
@@ -274,7 +278,7 @@ pub enum SetMutation {
 /// than the naive, obvious way.
 ///
 /// ```
-/// use gray_codes::{InclusionExclusion, SetMutation};
+/// use no_gray::{InclusionExclusion, SetMutation};
 ///
 /// let addends = [235, 63, 856, 967];
 ///
@@ -392,7 +396,7 @@ fn inclusion_exclusion() {
 /// Collect every subset of `0..4` into a `Vec` of `Vec`s.
 ///
 /// ```
-/// use gray_codes::VecSubsets;
+/// use no_gray::VecSubsets;
 /// static NUMBERS: &[u32] = &[0,1,2,3];
 /// let mut subsets: Vec<_> = VecSubsets::of(NUMBERS).collect();
 /// assert!(subsets.len() == 16);
@@ -418,8 +422,9 @@ fn inclusion_exclusion() {
 /// `HashSet` of `String`s.
 ///
 /// ```
-/// # use gray_codes::Subsets;
-/// # use std::collections::HashSet;
+/// # extern crate hashbrown;
+/// # use no_gray::Subsets;
+/// # use hashbrown::HashSet;
 /// static CHARS: &[char] = &['c', 'a', 't'];
 /// let subsets: HashSet<String> = Subsets::of(CHARS).collect();
 /// assert!(subsets.len() == 8);
