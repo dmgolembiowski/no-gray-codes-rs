@@ -1,6 +1,6 @@
 // gray-codes-rs: src/lib.rs
 //
-// Copyright 2017 David Creswick
+// Copyright 2017 David Creswick, David Golembiowski
 //
 // Licensed under the Apache License, Version 2.0, <LICENSE-APACHE or
 // http://apache.org/licenses/LICENSE-2.0> or the MIT license
@@ -32,7 +32,9 @@ use hashbrown::HashSet;
 extern crate core;
 use core::iter::{self, FromIterator};
 use core::option;
-use core::ops::Range;
+use core::ops::{ Range, Add};
+
+
 // FIXME: write tests that cover all the "Panics" sections
 
 
@@ -84,6 +86,30 @@ macro_rules! gray_code_impl {
         #[derive(Clone, Debug)] // FIXME: it might be nice if this were PartialEq+Eq
         pub struct $nm {
             range: iter::Chain<Range<$uint_ty>, option::IntoIter<$uint_ty>>
+        }
+        
+        impl Add for $nm {
+            type Output = Self;
+            
+            fn add(self, other: Self) -> Self {
+                /* Notes: Gp := "G prime", the successor (+1) of G
+                   B is the binary conversion of G
+                   so need to do:
+                   B = index(G)
+                   B = B + 1
+                   Gp = B ^ (B >> 1);
+
+                   For humans: Starting from the right, find the first place where the
+                   parity of the bits at -- and to the left of -- the position is even.
+                   Invert the bit at this position
+
+                   Or,
+
+                   Let p be the parity of the word G. If p is even, invert the rightmost bit.
+                   If p is odd, invert the bit to the left of the rightmost 1-bit. 
+                */
+                todo!()
+            }
         }
 
         impl $nm {
