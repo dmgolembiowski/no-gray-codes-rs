@@ -1,16 +1,13 @@
 [package]
-name = "gray-codes"
-version = "0.1.1"
-authors = ["David Creswick <dcrewi@gyrae.net>"]
-description = "Iterators over binary Gray codes; utilities for efficiently visiting all subsets of a collection"
+name = "no-gray"
+version = "0.1.0"
+authors = ["David Creswick <dcrewi@gyrae.net>", "David Golembiowski <david@dgolembiowski.com>"]
+description = "No-std iterators over binary Gray codes; utilities for efficiently visiting all subsets of a collection. Fork of gray-codes-rs."
 license = "MIT/Apache-2.0"
-repository = "https://github.com/dcrewi/gray-codes-rs"
-documentation = "https://docs.rs/gray-codes/"
+repository = "https://github.com/dgolembiowski/no-gray-codes-rs"
+documentation = "https://docs.rs/no-gray/"
 readme = "README.md"
-keywords = ["gray", "codes", "subset"]
-categories = ["algorithms"]
-
-[badges]
-travis-ci = { repository = "dcrewi/gray-codes-rs" }
+keywords = ["no-std", "embedded", "transmission"]
+categories = ["algorithms", "graphics"]
 
 [dependencies]
