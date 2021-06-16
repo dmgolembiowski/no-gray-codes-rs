@@ -91,7 +91,7 @@ macro_rules! gray_code_impl {
         impl Add for $nm {
             type Output = Self;
             
-            fn add(self, other: Self) -> Self {
+            fn add(self, other: Self) -> $uint_ty {
                 /* Notes: Gp := "G prime", the successor (+1) of G
                    B is the binary conversion of G
                    so need to do:
