@@ -16,4 +16,4 @@ travis-ci = { repository = "dmgolembiowski/no-gray-codes-rs" }
 
 
 [dependencies]
-hashbrown = { version = "0.11.2", default-features = false, features = ['rustc-dep-of-std'] }
+hashbrown = { version = "0.11.2", default-features = false, features = ['alloc'] }

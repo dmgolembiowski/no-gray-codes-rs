@@ -25,10 +25,16 @@
 //! provides a convenient way to iterate over subsets of a slice. The
 //! `InclusionExclusion` struct provides a building block for visiting
 //! all subsets more efficiently.
-#[no_std]
+#![no_std]
+#![feature(alloc_error_handler, core_intrinsics)]
+//extern crate alloc;
+//use alloc; //::{borrow};
+//use crate::alloc; //crate crate::alloc;
 
+#![feature(alloc)]
 extern crate hashbrown;
 use hashbrown::HashSet;
+
 extern crate core;
 use core::iter::{self, FromIterator};
 use core::option;
