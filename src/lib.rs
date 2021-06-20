@@ -25,21 +25,38 @@
 //! provides a convenient way to iterate over subsets of a slice. The
 //! `InclusionExclusion` struct provides a building block for visiting
 //! all subsets more efficiently.
-#![no_std]
-#![feature(alloc_error_handler, core_intrinsics)]
+/*#![no_std]
+
+//#![feature(alloc_error_handler, core_intrinsics)]
 //extern crate alloc;
 //use alloc; //::{borrow};
 //use crate::alloc; //crate crate::alloc;
 
-#![feature(alloc)]
+//#![feature(alloc)]
 extern crate hashbrown;
 use hashbrown::HashSet;
 
-extern crate core;
+//extern crate core;
 use core::iter::{self, FromIterator};
 use core::option;
 use core::ops::{ Range, Add};
+*/
 
+#![no_std]
+#![feature(alloc_error_handler, core_intrinsics)]
+#![feature(alloc)]
+#[macro_use] extern crate alloc;
+//use alloc; //::{borrow};
+//use crate::alloc; //crate crate::alloc;
+
+extern crate hashbrown;
+use hashbrown::HashSet;
+
+//extern crate core;
+use core::iter::{self, FromIterator};
+use core::option;
+use core::ops::{ Range, Add};
+use alloc::vec::Vec;
 
 // FIXME: write tests that cover all the "Panics" sections
 
@@ -97,7 +114,7 @@ macro_rules! gray_code_impl {
         impl Add for $nm {
             type Output = Self;
             
-            fn add(self, other: Self) -> $uint_ty {
+            fn add(self, other: Self) -> Self { //self::Output { //$uint_ty {
                 /* Notes: Gp := "G prime", the successor (+1) of G
                    B is the binary conversion of G
                    so need to do:
